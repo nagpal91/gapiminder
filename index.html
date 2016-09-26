@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    	<title>Lab1</title>
+    	
+    	<!--<script type="text/javascript">
+			function addCountry(){
+	        	var li = document.createElement("LI");  
+	        	var input = document.getElementById("addtolist");
+	        	li.innerHTML = input.value;
+	        	input.value = "";
+	        	document.getElementById("country").appendChild(li);
+    		}
+		</script> -->
+
+    	<style>
+    		#first, #second {
+    			margin-left:4%;
+    		}
+    		.label1{
+    			font-family:Arial, Helvetica, sans-serif;
+    			font-size:18px;
+    		}
+    		.countrylist{
+    			list-style: none;
+    			font-size:22px;
+    		}
+            #top{
+                height:45px;
+                background-color:black;
+                color:white;
+                font-size:20px;
+                text-align:center;
+            }
+            #nav{
+                padding:10px;
+            }
+            li{
+                list-style-type:none;
+            }
+    	</style>
+    </head>
+   	<body>
+   		<div id="top">
+            <div id="nav">Gapiminder - Wealth and Health</div>
+        </div>
+		<!--<div id="first">
+			<h2>Countries</h2>
+			<label for="name" class="label1">Name:&nbsp</label><input type="text" id="addtolist"> 
+			<button type="button" onclick="addCountry()">Add</button>
+		</div>
+		<hr>
+		<div id="second">
+				<div id="country" class="countrylist">
+				</div>
+		</div>-->
+        <div id="countrylist">
+            <h2>Countries</h2>
+            <ul id="list1"></ul>
+        </div>
+    <script type="text/javascript">
+        window.onload=function(a){
+            var showlist=d3.select("#countrylist"); 
+            d3.json("https://raw.githubusercontent.com/CristianFelix/infoviz/master/gapminder.json",function(error,result){
+                        var list=showlist.selectAll("li").data(result,function(a){return a.name;});
+                 list.enter().append("li").text(function (a) {return a.name;});
+                });
+            
+        };
+    </script>
+    </body>
+</html>
